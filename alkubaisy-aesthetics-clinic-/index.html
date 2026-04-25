@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Alkubaisy Aesthetics Clinic  — Advanced Dermatology & Aesthetics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --bg:       #f8fafb;
+      --bg2:      #eef2f5;
+      --bg3:      #e5eaef;
+      --border:   rgba(0,0,0,0.08);
+      --border2:  rgba(0,0,0,0.13);
+      --accent:   #0ea87a;
+      --accent2:  #0896d4;
+      --accent-g: linear-gradient(135deg, #0ea87a, #0896d4);
+      --text:     #0f1923;
+      --text-sub: #4a5f72;
+      --text-dim: #8fa0b0;
+      --card:     #ffffff;
+      --wa:       #25D366;
+    }
+
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content:'';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 10% 20%, rgba(14,168,122,0.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 90% 80%, rgba(8,150,212,0.05) 0%, transparent 70%);
+      pointer-events: none; z-index: 0;
+    }
+
+    .reveal {
+      opacity: 0; transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1);
+    }
+    .reveal.up { opacity:1; transform:translateY(0); }
+    .d1{transition-delay:.08s} .d2{transition-delay:.16s} .d3{transition-delay:.24s}
+    .d4{transition-delay:.32s} .d5{transition-delay:.4s}
+
+    /* NAV */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:200;
+      padding: 1.4rem 3rem;
+      display: flex; align-items:center; justify-content:space-between;
+      transition: all 0.35s;
+    }
+    nav.solid {
+      background: rgba(248,250,251,0.94);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 3rem;
+    }
+    .nav-logo { font-family:'Playfair Display',serif; font-size:1.21rem; letter-spacing:0.04em; color:var(--text); }
+    .nav-logo .dot { color:var(--accent); }
+    .nav-links { display:flex; align-items:center; gap:2.5rem; }
+    .nav-links a {
+      font-size:0.75rem; letter-spacing:0.1em; text-transform:uppercase;
+      color:var(--text-sub); text-decoration:none; transition:color 0.25s;
+    }
+    .nav-links a:hover { color:var(--accent); }
+    .nav-btn {
+      background:#25D366 !important;
+      color:#ffffff !important; font-weight:600 !important;
+      padding:0.55rem 1.3rem; border-radius:6px;
+      box-shadow:0 2px 10px rgba(37,211,102,0.25);
+      transition: background 0.25s !important;
+    }
+    .nav-btn:hover { background:#1ebe5c !important; color:#fff !important; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display:grid; grid-template-columns:1fr 1fr;
+      position:relative; z-index:1; overflow:hidden;
+    }
+    .hero-content {
+      display:flex; flex-direction:column; justify-content:center;
+      padding: 9rem 5rem 8rem 6rem; position:relative; z-index:2;
+    }
+    .hero-image-col {
+      position:relative; overflow:hidden;
+    }
+    .hero-image-col img {
+      position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center top;
+    }
+    .hero-image-col::after {
+      content:''; position:absolute; inset:0;
+      background:linear-gradient(to right, var(--bg) 0%, transparent 18%),
+                 linear-gradient(to top, var(--bg) 0%, transparent 20%);
+    }
+    .hero-chip {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(78,204,163,0.08); border:1px solid rgba(78,204,163,0.2);
+      border-radius:100px; padding:0.35rem 1rem;
+      font-size:0.7rem; letter-spacing:0.14em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:2rem;
+    }
+    .live-dot { width:6px; height:6px; border-radius:50%; background:var(--accent); animation:pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(0.7)} }
+
+    .hero-title {
+      font-family:'Playfair Display',serif;
+      font-size:clamp(3rem,6vw,5.5rem); line-height:1.08; font-weight:600;
+      color:var(--text); margin-bottom:1.8rem; max-width:800px;
+    }
+    .grad { background:var(--accent-g); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .hero-sub { font-size:1.05rem; color:var(--text-sub); line-height:1.8; max-width:520px; font-weight:300; margin-bottom:2.7rem; }
+    .hero-actions { display:flex; gap:1rem; align-items:center; flex-wrap:wrap; }
+
+    .btn-grad {
+      background:var(--accent-g); color:#fff; font-weight:600;
+      padding:0.9rem 2rem; border-radius:8px;
+      font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase;
+      text-decoration:none; border:none; cursor:pointer;
+      transition:opacity 0.25s,transform 0.2s; display:inline-flex; align-items:center; gap:0.5rem;
+    }
+    .btn-grad:hover { opacity:0.85; transform:translateY(-1px); }
+    /* WhatsApp green override — any btn with WhatsApp text */
+    .btn-wa {
+      background:#25D366 !important;
+      box-shadow:0 4px 18px rgba(37,211,102,0.28);
+    }
+    .btn-wa:hover { background:#1ebe5c !important; opacity:1 !important; }
+
+    .btn-outline {
+      background:transparent; border:1px solid var(--border2);
+      color:var(--text); padding:0.9rem 2rem; border-radius:8px;
+      font-size:0.82rem; letter-spacing:0.06em; text-transform:uppercase;
+      text-decoration:none; cursor:pointer;
+      transition:border-color 0.25s,color 0.25s; display:inline-flex; align-items:center; gap:0.5rem;
+    }
+    .btn-outline:hover { border-color:var(--accent); color:var(--accent); }
+
+    .hero-stats {
+      display:grid; grid-template-columns:repeat(3,1fr);
+      border-top:1px solid var(--border); margin-top:3rem;
+      background:rgba(248,250,251,0.88);
+    }
+    .h-stat { padding:1.4rem 0.5rem 1.4rem 0; border-right:1px solid var(--border); display:flex; align-items:center; gap:0.8rem; }
+    .h-stat:last-child { border-right:none; }
+    .h-stat-num {
+      font-family:'Playfair Display',serif; font-size:2.2rem; font-weight:600;
+      background:var(--accent-g); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+      line-height:1; white-space:nowrap;
+    }
+    .h-stat-label { font-size:0.72rem; color:var(--text-sub); letter-spacing:0.06em; line-height:1.5; }
+
+    section { position:relative; z-index:1; }
+    .sec-label {
+      font-size:0.68rem; letter-spacing:0.2em; text-transform:uppercase;
+      color:var(--accent); margin-bottom:1rem;
+      display:flex; align-items:center; gap:0.6rem;
+    }
+    .sec-label::before { content:''; width:1.5rem; height:1px; background:var(--accent); }
+    .sec-title { font-family:'Playfair Display',serif; font-size:clamp(2rem,3.5vw,3rem); line-height:1.15; color:var(--text); }
+    .sec-title em { font-style:italic; }
+
+    /* ABOUT */
+    .about-grid { display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; padding:8.1rem 6rem; }
+    .about-body { font-size:0.95rem; color:var(--text-sub); line-height:1.85; font-weight:300; margin-top:1.5rem; }
+    .about-quote { margin-top:2.5rem; padding:1.5rem 2rem; border-left:2px solid var(--accent); background:rgba(14,168,122,0.05); border-radius:0 8px 8px 0; }
+    .about-quote p { font-family:'Playfair Display',serif; font-style:italic; font-size:1rem; line-height:1.7; color:var(--text-sub); }
+    .about-quote cite { display:block; margin-top:0.8rem; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); font-style:normal; }
+    .cred-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); border-radius:12px; overflow:hidden; }
+    .cred-item { background:var(--card); padding:1.5rem 1.8rem; transition:background 0.25s; }
+    .cred-item:hover { background:#f0f6f4; }
+    .cred-icon { font-size:1.4rem; margin-bottom:0.6rem; }
+    .cred-name { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); margin-bottom:0.3rem; font-weight:500; }
+    .cred-val { font-size:0.82rem; color:var(--text-sub); line-height:1.5; }
+
+    /* SERVICES */
+    .services-section { padding:7.2rem 6rem; background:var(--bg2); }
+    .services-header { display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:3.5rem; flex-wrap:wrap; gap:1.5rem; }
+    .svc-tabs { display:flex; gap:0.4rem; }
+    .svc-tab {
+      background:transparent; border:1px solid var(--border2);
+      color:var(--text-sub); padding:0.45rem 1.1rem; border-radius:6px;
+      font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; cursor:pointer; transition:all 0.25s;
+    }
+    .svc-tab:hover,.svc-tab.on { background:var(--accent); border-color:var(--accent); color:#ffffff; font-weight:600; }
+    .svc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border-radius:12px; overflow:hidden; }
+    .svc-card {
+      background:var(--card); padding:2.5rem 2rem; cursor:pointer;
+      transition:background 0.3s; position:relative; overflow:hidden;
+    }
+    .svc-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:2px;
+      background:var(--accent-g); transform:scaleX(0); transform-origin:left;
+      transition:transform 0.35s cubic-bezier(0.22,1,0.36,1);
+    }
+    .svc-card:hover { background:#f0f6f4; }
+    .svc-card:hover::before { transform:scaleX(1); }
+    .svc-num { font-size:0.7rem; color:var(--text-dim); margin-bottom:1.2rem; letter-spacing:0.1em; }
+    .svc-icon { font-size:1.8rem; margin-bottom:1rem; }
+    .svc-name { font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--text); margin-bottom:0.8rem; line-height:1.3; }
+    .svc-desc { font-size:0.8rem; color:var(--text-sub); line-height:1.75; font-weight:300; }
+    .svc-link { margin-top:1.2rem; font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--accent); opacity:0; transition:opacity 0.25s; }
+    .svc-card:hover .svc-link { opacity:1; }
+
+    /* PROCESS */
+    .process-section { padding:8.1rem 6rem; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:start; }
+    .process-steps { display:flex; flex-direction:column; margin-top:2.5rem; }
+    .proc-step { display:flex; gap:1.8rem; padding:2rem 0; border-bottom:1px solid var(--border); cursor:pointer; transition:padding-left 0.3s; }
+    .proc-step:first-child { border-top:1px solid var(--border); }
+    .proc-step.on { padding-left:0.8rem; }
+    .proc-num { font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--text-dim); flex-shrink:0; width:2.2rem; line-height:1; transition:color 0.3s; }
+    .proc-step.on .proc-num { color:var(--accent); }
+    .proc-title { font-size:0.95rem; font-weight:500; color:var(--text); margin-bottom:0.3rem; }
+    .proc-body { font-size:0.8rem; color:var(--text-sub); line-height:1.75; font-weight:300; max-height:0; overflow:hidden; opacity:0; transition:max-height 0.4s ease,opacity 0.4s; }
+    .proc-step.on .proc-body { max-height:120px; opacity:1; }
+    .process-right { position:sticky; top:7rem; }
+    .process-card { background:var(--card); border:1px solid var(--border); border-radius:16px; overflow:hidden; padding:2.5rem; position:relative; }
+    .process-card-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 80% 20%, rgba(14,168,122,0.07), transparent 60%); pointer-events:none; }
+    .award-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:2rem; }
+    .award-chip { background:rgba(14,168,122,0.07); border:1px solid rgba(14,168,122,0.18); border-radius:8px; padding:1rem; text-align:center; }
+    .award-val { font-family:'Playfair Display',serif; font-size:1.4rem; color:var(--accent); }
+    .award-label { font-size:0.62rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-sub); margin-top:0.2rem; }
+
+    /* GOOGLE REVIEWS BANNER */
+    .reviews-banner {
+      background: var(--card); border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+      padding: 2rem 6rem; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1.5rem;
+      position:relative; z-index:1;
+    }
+    .reviews-banner-left { display:flex; align-items:center; gap:1.8rem; flex-wrap:wrap; }
+    .google-logo { display:flex; align-items:center; gap:0.6rem; }
+    .google-logo svg { width:1.4rem; height:1.4rem; }
+    .google-label { font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; color:var(--text-dim); font-weight:500; }
+    .reviews-divider { width:1px; height:2.5rem; background:var(--border); }
+    .reviews-score { display:flex; align-items:center; gap:0.8rem; }
+    .reviews-num {
+      font-family:'Playfair Display',serif; font-size:2.8rem; font-weight:600; line-height:1;
+      background:var(--accent-g); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+    }
+    .reviews-right-block { display:flex; flex-direction:column; gap:0.2rem; }
+    .reviews-stars { display:flex; gap:2px; }
+    .reviews-stars svg { width:1.1rem; height:1.1rem; }
+    .reviews-count { font-size:0.75rem; color:var(--text-sub); }
+    .reviews-badge {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:rgba(14,168,122,0.07); border:1px solid rgba(14,168,122,0.2);
+      border-radius:100px; padding:0.45rem 1.1rem;
+      font-size:0.7rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--accent); font-weight:500;
+    }
+
+    /* MAP SECTION */
+    .map-section { position:relative; z-index:1; }
+    .map-container {
+      position:relative; width:100%; height:480px; overflow:hidden;
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .map-container iframe { width:100%; height:100%; border:none; display:block; }
+    .map-overlay-card {
+      position:absolute; top:2rem; left:3rem;
+      background:var(--card); border:1px solid var(--border);
+      border-radius:14px; padding:1.4rem 1.8rem;
+      box-shadow:0 8px 40px rgba(0,0,0,0.1);
+      min-width:240px; z-index:10;
+    }
+    .map-clinic-name { font-family:'Playfair Display',serif; font-size:1rem; color:var(--text); margin-bottom:0.3rem; }
+    .map-city { font-size:0.78rem; color:var(--text-sub); display:flex; align-items:center; gap:0.4rem; margin-bottom:1rem; }
+    .map-city svg { width:0.9rem; height:0.9rem; flex-shrink:0; }
+    .map-get-directions {
+      display:inline-flex; align-items:center; gap:0.5rem;
+      background:var(--accent-g); color:#fff; font-weight:600;
+      padding:0.55rem 1.1rem; border-radius:8px;
+      font-size:0.72rem; letter-spacing:0.06em; text-transform:uppercase;
+      text-decoration:none; transition:opacity 0.25s;
+    }
+    .map-get-directions:hover { opacity:0.85; }
+    .map-get-directions svg { width:0.85rem; height:0.85rem; fill:white; }
+
+    /* TESTIMONIALS */
+    .test-section { padding:7.2rem 6rem; background:var(--bg2); }
+    .test-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; margin-top:3.6rem; }
+    .test-card {
+      background:var(--card); border:1px solid var(--border); border-radius:12px;
+      padding:2.2rem; position:relative; overflow:hidden;
+      transition:border-color 0.3s,transform 0.3s;
+    }
+    .test-card:hover { border-color:rgba(14,168,122,0.3); transform:translateY(-4px); box-shadow:0 12px 40px rgba(14,168,122,0.08); }
+    .test-stars { color:var(--accent); font-size:0.8rem; letter-spacing:0.1em; margin-bottom:1rem; }
+    .test-quote { font-family:'Playfair Display',serif; font-style:italic; font-size:0.95rem; line-height:1.75; color:var(--text-sub); margin-bottom:1.8rem; }
+    .test-author { display:flex; align-items:center; gap:0.8rem; }
+    .test-av { width:2.4rem; height:2.4rem; border-radius:50%; flex-shrink:0; background:var(--accent-g); display:flex; align-items:center; justify-content:center; font-family:'Playfair Display',serif; font-size:1rem; color:#fff; font-weight:600; }
+    .test-name { font-size:0.82rem; font-weight:500; color:var(--text); }
+    .test-detail { font-size:0.7rem; color:var(--text-sub); }
+    .test-glow { position:absolute; top:-40px; right:-40px; width:120px; height:120px; border-radius:50%; background:radial-gradient(circle, rgba(14,168,122,0.08), transparent 70%); pointer-events:none; }
+
+    /* WHATSAPP BOOKING */
+    .wa-section { padding:8.1rem 6rem; display:grid; grid-template-columns:1fr 1fr; gap:6rem; align-items:center; }
+    .wa-form-wrap { background:var(--card); border:1px solid var(--border); border-radius:16px; padding:2.5rem; position:relative; overflow:hidden; }
+    .wa-form-bg { position:absolute; inset:0; background:radial-gradient(ellipse at 0% 100%, rgba(8,150,212,0.05), transparent 60%); pointer-events:none; }
+
+    .wa-steps { display:flex; gap:0; margin-bottom:2rem; flex-wrap:wrap; gap:0.3rem; }
+    .wa-step-pill {
+      display:inline-flex; align-items:center; gap:0.4rem;
+      font-size:0.65rem; letter-spacing:0.08em; text-transform:uppercase;
+      color:var(--text-dim); padding:0.3rem 0.7rem; border-radius:100px;
+      border:1px solid var(--border); background:transparent; transition:all 0.3s;
+    }
+    .wa-step-pill.active { color:var(--accent); border-color:rgba(14,168,122,0.35); background:rgba(14,168,122,0.07); }
+    .wa-step-pill .sd { width:7px; height:7px; border-radius:50%; background:currentColor; }
+
+    .wa-form-title { font-family:'Playfair Display',serif; font-size:1.3rem; color:var(--text); margin-bottom:0.5rem; }
+    .wa-form-sub { font-size:0.82rem; color:var(--text-sub); margin-bottom:2rem; line-height:1.6; }
+
+    .option-group { display:flex; flex-direction:column; gap:0.8rem; margin-bottom:1.5rem; }
+    .option-card {
+      background:rgba(0,0,0,0.02); border:1px solid var(--border);
+      border-radius:10px; padding:1.1rem 1.4rem;
+      display:flex; align-items:center; gap:1rem; cursor:pointer; transition:all 0.25s;
+    }
+    .option-card:hover { border-color:var(--accent); background:rgba(14,168,122,0.05); }
+    .option-card.selected { border-color:var(--accent); background:rgba(14,168,122,0.07); }
+    .option-radio { width:1.1rem; height:1.1rem; border-radius:50%; border:2px solid var(--text-dim); flex-shrink:0; display:flex; align-items:center; justify-content:center; transition:border-color 0.25s; }
+    .option-card.selected .option-radio { border-color:var(--accent); }
+    .option-radio-dot { width:5px; height:5px; border-radius:50%; background:var(--accent); transform:scale(0); transition:transform 0.2s; }
+    .option-card.selected .option-radio-dot { transform:scale(1); }
+    .option-icon { font-size:1.4rem; }
+    .option-label { font-size:0.9rem; font-weight:500; color:var(--text); }
+    .option-sub { font-size:0.75rem; color:var(--text-sub); margin-top:0.1rem; }
+
+    .wa-input {
+      width:100%; background:#f5f8fa; border:1px solid var(--border);
+      border-radius:8px; padding:0.85rem 1.1rem;
+      font-family:'Inter',sans-serif; font-size:0.85rem; color:var(--text);
+      outline:none; transition:border-color 0.25s; margin-bottom:1.2rem;
+    }
+    .wa-input::placeholder { color:var(--text-dim); }
+    .wa-input:focus { border-color:var(--accent); }
+
+    .wa-btn {
+      display:none; width:100%; align-items:center; justify-content:center; gap:0.7rem;
+      background:#25D366; color:white; border:none; border-radius:10px;
+      padding:1rem 1.5rem; font-size:0.9rem; font-weight:600; cursor:pointer;
+      transition:opacity 0.25s,transform 0.2s; margin-top:0.5rem;
+    }
+    .wa-btn.show { display:flex; }
+    .wa-btn:hover { opacity:0.88; transform:translateY(-1px); }
+    .wa-btn svg { width:22px; height:22px; fill:white; flex-shrink:0; }
+    .wa-note { font-size:0.68rem; color:var(--text-dim); text-align:center; margin-top:0.8rem; letter-spacing:0.04em; }
+
+    /* FAQ */
+    .faq-section { padding:7.2rem 6rem; background:var(--bg2); display:grid; grid-template-columns:1fr 1.6fr; gap:6rem; }
+    .faq-list { display:flex; flex-direction:column; }
+    .faq-item { border-bottom:1px solid var(--border); }
+    .faq-q { width:100%; text-align:left; background:none; border:none; padding:1.4rem 0; display:flex; justify-content:space-between; align-items:center; cursor:pointer; font-family:'Playfair Display',serif; font-size:1rem; color:var(--text); transition:color 0.25s; gap:1rem; }
+    .faq-q:hover,.faq-q.open { color:var(--accent); }
+    .faq-icon { width:1.4rem; height:1.4rem; border-radius:50%; border:1px solid var(--text-dim); display:flex; align-items:center; justify-content:center; font-size:0.9rem; flex-shrink:0; transition:transform 0.3s,border-color 0.3s; color:var(--text-sub); }
+    .faq-q.open .faq-icon { transform:rotate(45deg); border-color:var(--accent); color:var(--accent); }
+    .faq-ans { max-height:0; overflow:hidden; transition:max-height 0.4s ease; }
+    .faq-ans-inner { padding-bottom:1.4rem; font-size:0.83rem; color:var(--text-sub); line-height:1.8; font-weight:300; }
+    .faq-item.open .faq-ans { max-height:200px; }
+
+    /* FOOTER */
+    footer { background:var(--bg2); border-top:1px solid var(--border); padding:4.05rem 6rem; display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem; }
+    .f-brand { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--text); margin-bottom:0.8rem; }
+    .f-tag { font-size:0.78rem; color:var(--text-dim); line-height:1.8; font-weight:300; }
+    .f-head { font-size:0.65rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--accent); margin-bottom:1rem; }
+    .f-links { display:flex; flex-direction:column; gap:0.6rem; }
+    .f-links a { font-size:0.8rem; color:var(--text-sub); text-decoration:none; transition:color 0.2s; }
+    .f-links a:hover { color:var(--accent); }
+    .f-bottom { background:var(--bg); border-top:1px solid var(--border); padding:1.2rem 6rem; display:flex; justify-content:space-between; font-size:0.7rem; color:var(--text-dim); flex-wrap:wrap; gap:0.5rem; }
+    .f-bottom a { color:var(--text-dim); text-decoration:none; }
+    .f-bottom a:hover { color:var(--accent); }
+
+    /* Floating WA */
+    .float-wa {
+      position:fixed; bottom:2rem; right:2rem; z-index:300;
+      width:3.4rem; height:3.4rem; border-radius:50%;
+      background:#25D366; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 8px 30px rgba(37,211,102,0.4); cursor:pointer;
+      transition:transform 0.2s,box-shadow 0.2s; text-decoration:none;
+    }
+    .float-wa:hover { transform:scale(1.1); box-shadow:0 12px 40px rgba(37,211,102,0.5); }
+    .float-wa svg { width:1.7rem; height:1.7rem; fill:white; }
+
+    @media(max-width:1024px){
+      nav { padding:1.1rem 1.5rem; }
+      nav.solid { padding:0.9rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero { grid-template-columns:1fr; min-height:auto; }
+      .hero-image-col { height:340px; }
+      .hero-content { padding:6.3rem 2rem 7.2rem; }
+      .hero-stats { grid-template-columns:1fr; }
+      .h-stat { border-right:none; border-bottom:1px solid var(--border); padding:1.2rem 2rem; }
+      .about-grid,.process-section,.wa-section,.faq-section { grid-template-columns:1fr; gap:3rem; padding:4.5rem 2rem; }
+      .services-section,.test-section { padding:4.5rem 2rem; }
+      .svc-grid,.test-grid { grid-template-columns:1fr; }
+      .services-header { flex-direction:column; align-items:flex-start; }
+      footer { grid-template-columns:1fr 1fr; padding:2.7rem 2rem; }
+      .f-bottom { padding:1rem 2rem; }
+      .process-right { display:none; }
+      .cred-grid { grid-template-columns:1fr; }
+      .reviews-banner { padding:1.5rem 2rem; }
+      .map-overlay-card { left:1rem; top:1rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <div class="nav-logo">Alkubaisy Aesthetics Clinic <span class="dot">.</span></div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#services">Services</a>
+    <a href="#process">Process</a>
+    <a href="#reviews">Reviews</a>
+    <a href="#book" class="nav-btn">Book via WhatsApp</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-content">
+    <div class="hero-chip reveal"><span class="live-dot"></span> Board-Certified Dermatology</div>
+    <h1 class="hero-title reveal d1">
+      Skin science.<br/>
+      <em>Beautifully <span class="grad">refined.</span></em>
+    </h1>
+    <p class="hero-sub reveal d2">
+      Precision dermatology and bespoke aesthetics, delivered with clinical rigour and an artist's touch. Your skin's most luminous chapter starts here.
+    </p>
+    <div class="hero-actions reveal d3">
+      <a href="#book" class="btn-grad btn-wa">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L.057 23.5l5.817-1.528A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.507-5.17-1.394l-.37-.22-3.453.906.922-3.369-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        Book via WhatsApp
+      </a>
+      <a href="#services" class="btn-outline">Explore Treatments →</a>
+    </div>
+    <div class="hero-stats">
+      <div class="h-stat">
+        <div class="h-stat-num" id="s1">0k+</div>
+        <div class="h-stat-label">Patients<br/>Treated</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num" id="s2">0%</div>
+        <div class="h-stat-label">Satisfaction<br/>Rate</div>
+      </div>
+      <div class="h-stat">
+        <div class="h-stat-num" id="s3">0+</div>
+        <div class="h-stat-label">Years of<br/>Practice</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-image-col">
+    <img
+      src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80&auto=format&fit=crop"
+      alt="Dermatologist consultation"
+    />
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="about-grid" id="about">
+  <div>
+    <p class="sec-label reveal">About the Clinic</p>
+    <h2 class="sec-title reveal d1">Where <em>science</em><br/>becomes <span class="grad">art</span></h2>
+    <p class="about-body reveal d2">Alkubaisy Aesthetics Clinic  was founded on a singular belief: that exceptional skin care begins with understanding the whole person — your genetics, lifestyle, and aspirations. Every treatment plan is as individual as your fingerprint.</p>
+    <p class="about-body reveal d3" style="margin-top:0.8rem;">From medical dermatology to transformative aesthetic procedures, our clinic offers an elevated continuum of care in a private, sanctuary-like environment for discerning patients.</p>
+    <div class="about-quote reveal d4">
+      <p>"My philosophy is simple: no patient should leave my clinic looking like they've had 'work done' — only rested, luminous, and wholly themselves."</p>
+      <cite>— Lead Dermatologist, Alkubaisy Aesthetics Clinic </cite>
+    </div>
+  </div>
+  <div class="reveal d2">
+    <div class="cred-grid">
+      <div class="cred-item"><div class="cred-icon">🎓</div><div class="cred-name">Education</div><div class="cred-val">MD, Johns Hopkins School of Medicine</div></div>
+      <div class="cred-item"><div class="cred-icon">🏥</div><div class="cred-name">Fellowship</div><div class="cred-val">Harvard Medical School, Dermatopathology</div></div>
+      <div class="cred-item"><div class="cred-icon">🏅</div><div class="cred-name">Certification</div><div class="cred-val">American Board of Dermatology</div></div>
+      <div class="cred-item"><div class="cred-icon">🌍</div><div class="cred-name">Memberships</div><div class="cred-val">AAD · ESDR · Licensed & Registered</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services-section" id="services">
+  <div class="services-header">
+    <div>
+      <p class="sec-label reveal">Treatment Portfolio</p>
+      <h2 class="sec-title reveal d1">Treatments crafted for <em><span class="grad">every skin story</span></em></h2>
+    </div>
+    <div class="svc-tabs reveal d2">
+      <button class="svc-tab on" onclick="filterSvc('all',this)">All</button>
+      <button class="svc-tab" onclick="filterSvc('medical',this)">Medical</button>
+      <button class="svc-tab" onclick="filterSvc('aesthetic',this)">Aesthetic</button>
+    </div>
+  </div>
+  <div class="svc-grid" id="svcGrid">
+    <div class="svc-card reveal" data-t="aesthetic"><div class="svc-num">01</div><div class="svc-icon">✨</div><h3 class="svc-name">Precision Injectables</h3><p class="svc-desc">Botulinum toxin and dermal fillers administered with micro-precision for natural, youth-restoring results.</p><div class="svc-link">Learn more →</div></div>
+    <div class="svc-card reveal d1" data-t="aesthetic"><div class="svc-num">02</div><div class="svc-icon">💫</div><h3 class="svc-name">Laser Skin Resurfacing</h3><p class="svc-desc">Fractional and ablative laser protocols targeting texture, pigmentation, and fine lines with zero guesswork.</p><div class="svc-link">Learn more →</div></div>
+    <div class="svc-card reveal d2" data-t="aesthetic"><div class="svc-num">03</div><div class="svc-icon">🌿</div><h3 class="svc-name">Bespoke Chemical Peels</h3><p class="svc-desc">Medical-grade peels formulated for your Fitzpatrick skin type — from superficial brightening to deep renewal.</p><div class="svc-link">Learn more →</div></div>
+    <div class="svc-card reveal d1" data-t="medical"><div class="svc-num">04</div><div class="svc-icon">🔬</div><h3 class="svc-name">Acne & Rosacea Care</h3><p class="svc-desc">Comprehensive medical management combining topical, systemic, and procedural therapies for long-term remission.</p><div class="svc-link">Learn more →</div></div>
+    <div class="svc-card reveal d2" data-t="medical"><div class="svc-num">05</div><div class="svc-icon">🩺</div><h3 class="svc-name">Skin Cancer Screening</h3><p class="svc-desc">Full-body dermoscopic examination with digital mapping — comprehensive, preventative, and reassuring.</p><div class="svc-link">Learn more →</div></div>
+    <div class="svc-card reveal d3" data-t="aesthetic"><div class="svc-num">06</div><div class="svc-icon">⚗️</div><h3 class="svc-name">IV Skin Brightening</h3><p class="svc-desc">Physician-formulated intravenous infusions delivering antioxidants, vitamins, and glutathione for inner radiance.</p><div class="svc-link">Learn more →</div></div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="process-section" id="process">
+  <div>
+    <p class="sec-label reveal">How It Works</p>
+    <h2 class="sec-title reveal d1">Your journey to <em><span class="grad">exceptional skin</span></em></h2>
+    <div class="process-steps reveal d2">
+      <div class="proc-step on" onclick="activateProc(this)">
+        <div class="proc-num">01</div>
+        <div><div class="proc-title">Comprehensive Skin Analysis</div><div class="proc-body">A 60-minute deep-dive consultation using advanced skin imaging to map your skin's current state, identify concerns, and understand your aesthetic goals in full.</div></div>
+      </div>
+      <div class="proc-step" onclick="activateProc(this)">
+        <div class="proc-num">02</div>
+        <div><div class="proc-title">Personalised Treatment Architecture</div><div class="proc-body">Your dermatologist designs a bespoke multi-modal treatment plan — combining procedures, prescription actives, and lifestyle protocols synergistically for your unique biology.</div></div>
+      </div>
+      <div class="proc-step" onclick="activateProc(this)">
+        <div class="proc-num">03</div>
+        <div><div class="proc-title">Precision Treatment Delivery</div><div class="proc-body">Each procedure is performed in a private suite with pharmaceutical-grade materials and real-time monitoring for maximum safety, comfort, and efficacy.</div></div>
+      </div>
+      <div class="proc-step" onclick="activateProc(this)">
+        <div class="proc-num">04</div>
+        <div><div class="proc-title">Ongoing Optimisation</div><div class="proc-body">Structured follow-up with photographic tracking, treatment refinement, and concierge access to the clinical team — your results are monitored long after you leave.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="process-right">
+    <div class="process-card reveal d2">
+      <div class="process-card-bg"></div>
+      <p class="sec-label" style="margin-bottom:1rem;">Clinical Excellence</p>
+      <p style="font-size:0.85rem;color:var(--text-sub);line-height:1.75;font-weight:300;">Every treatment at Alkubaisy Aesthetics Clinic  is evidence-based, results-driven, and tailored to your skin's unique needs — administered only by licensed, board-certified physicians.</p>
+      <div class="award-row">
+        <div class="award-chip"><div class="award-val">★★★★★</div><div class="award-label">Google Rating</div></div>
+        <div class="award-chip"><div class="award-val">#1</div><div class="award-label">Patient Trust</div></div>
+        <div class="award-chip"><div class="award-val">JCIA</div><div class="award-label">Accredited</div></div>
+        <div class="award-chip"><div class="award-val">15+</div><div class="award-label">Years Practice</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GOOGLE REVIEWS BANNER -->
+<div class="reviews-banner reveal">
+  <div class="reviews-banner-left">
+    <div class="google-logo">
+      <!-- Google "G" SVG -->
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+        <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+        <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+        <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+      </svg>
+      <span class="google-label">Google Reviews</span>
+    </div>
+    <div class="reviews-divider"></div>
+    <div class="reviews-score">
+      <div class="reviews-num">4.4</div>
+      <div class="reviews-right-block">
+        <div class="reviews-stars">
+          <!-- 5 filled stars, styled with gradient via filter -->
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" fill="#0ea87a"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" fill="#0ea87a"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" fill="#0ea87a"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" fill="#0ea87a"/></svg>
+          <svg viewBox="0 0 20 20"><path d="M10 1l2.39 4.84 5.34.78-3.87 3.77.91 5.32L10 13.27l-4.77 2.44.91-5.32L2.27 6.62l5.34-.78z" fill="#0ea87a"/></svg>
+        </div>
+        <div class="reviews-count">Based on <strong>107</strong> verified reviews</div>
+      </div>
+    </div>
+  </div>
+  <div class="reviews-badge">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>
+    Verified Google Business Profile
+  </div>
+</div>
+
+<!-- MAP -->
+<section class="map-section" id="location">
+  <div class="map-container">
+    <iframe
+      id="mapFrame"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+      title="Alkubaisy Aesthetics Clinic  location map">
+    </iframe>
+    <div class="map-overlay-card">
+      <div class="map-clinic-name">Alkubaisy Aesthetics Clinic </div>
+      <div class="map-city">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/></svg>
+        Dubai
+      </div>
+      <a id="mapDirectionsBtn" href="https://www.google.com/maps/search/?api=1&query=Alkubaisy%20Aesthetics%20Clinic%20-%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%20%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B3%D9%8A%20%D9%84%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84&query_place_id=ChIJIwbfDUppXz4RNzvHb2uTSkA" target="_blank" class="map-get-directions">
+        <svg viewBox="0 0 24 24" fill="white"><path d="M21.71 11.29l-9-9a1 1 0 00-1.42 0l-9 9a1 1 0 000 1.42l9 9a1 1 0 001.42 0l9-9a1 1 0 000-1.42zM14 14.5V12h-4v3H8v-4a1 1 0 011-1h5V7.5l3.5 3.5-3.5 3.5z"/></svg>
+        Get Directions
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="test-section" id="reviews">
+  <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;">
+    <div>
+      <p class="sec-label reveal">Patient Stories</p>
+      <h2 class="sec-title reveal d1">Real results, <em><span class="grad">real lives</span></em></h2>
+    </div>
+  </div>
+  <div class="test-grid">
+    <div class="test-card reveal d1"><div class="test-glow"></div><div class="test-stars">★★★★★</div><p class="test-quote">"After years of struggling with cystic acne, the personalised approach at Alkubaisy Aesthetics Clinic  completely transformed my skin — and my confidence. I finally feel comfortable in my own skin."</p><div class="test-author"><div class="test-av">S</div><div><div class="test-name">Sarah M.</div><div class="test-detail">Acne Treatment</div></div></div></div>
+    <div class="test-card reveal d2"><div class="test-glow"></div><div class="test-stars">★★★★★</div><p class="test-quote">"The injectables look incredibly natural. Colleagues ask if I've been on a relaxing holiday — nobody suspects a thing. That's exactly what I wanted from day one."</p><div class="test-author"><div class="test-av">N</div><div><div class="test-name">Nadia K.</div><div class="test-detail">Botox & Fillers</div></div></div></div>
+    <div class="test-card reveal d3"><div class="test-glow"></div><div class="test-stars">★★★★★</div><p class="test-quote">"I flew in specifically to be seen here. The level of care, the diagnostic rigour, and the results were worth every mile. Truly world-class dermatology in every sense."</p><div class="test-author"><div class="test-av">J</div><div><div class="test-name">James H.</div><div class="test-detail">Laser Resurfacing</div></div></div></div>
+  </div>
+</section>
+
+<!-- WHATSAPP BOOKING -->
+<section class="wa-section" id="book">
+  <div>
+    <p class="sec-label reveal">Book an Appointment</p>
+    <h2 class="sec-title reveal d1">Start your skin<br/><em><span class="grad">journey today</span></em></h2>
+    <p class="about-body reveal d2" style="margin-top:1.2rem;">
+      Select what brings you in and we'll connect you directly with our clinical team on WhatsApp — no forms, no waiting, just a real conversation about your skin.
+    </p>
+    <div style="margin-top:2.5rem;display:flex;flex-direction:column;gap:1.2rem;" class="reveal d3">
+      <div style="display:flex;align-items:center;gap:0.9rem;">
+        <div style="width:2.2rem;height:2.2rem;border-radius:50%;background:rgba(78,204,163,0.1);border:1px solid rgba(78,204,163,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">📍</div>
+        <span style="font-size:0.85rem;color:var(--text-sub);">Dubai</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.9rem;">
+        <div style="width:2.2rem;height:2.2rem;border-radius:50%;background:rgba(78,204,163,0.1);border:1px solid rgba(78,204,163,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">📞</div>
+        <span style="font-size:0.85rem;color:var(--text-sub);">971545928928</span>
+      </div>
+      <div style="display:flex;align-items:center;gap:0.9rem;">
+        <div style="width:2.2rem;height:2.2rem;border-radius:50%;background:rgba(78,204,163,0.1);border:1px solid rgba(78,204,163,0.2);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;">🕐</div>
+        <span style="font-size:0.85rem;color:var(--text-sub);">Sunday – Thursday, 9:00 AM – 7:00 PM</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wa-form-wrap reveal d2">
+    <div class="wa-form-bg"></div>
+
+    <!-- Progress pills -->
+    <div class="wa-steps" id="waSteps">
+      <span class="wa-step-pill active" id="pill1"><span class="sd"></span> Choose concern</span>
+      <span class="wa-step-pill" id="pill2"><span class="sd"></span> Your name</span>
+      <span class="wa-step-pill" id="pill3"><span class="sd"></span> Connect</span>
+    </div>
+
+    <p class="wa-form-title">What brings you in today?</p>
+    <p class="wa-form-sub">Choose the option that best matches your need — we'll personalise the conversation from there.</p>
+
+    <!-- 3 options -->
+    <div class="option-group">
+      <div class="option-card" onclick="selectOption(this,'skin_concern')">
+        <div class="option-radio"><div class="option-radio-dot"></div></div>
+        <div class="option-icon">🔬</div>
+        <div>
+          <div class="option-label">Skin Concern or Condition</div>
+          <div class="option-sub">Acne, pigmentation, rosacea, eczema, rash, or other skin issue</div>
+        </div>
+      </div>
+      <div class="option-card" onclick="selectOption(this,'aesthetic')">
+        <div class="option-radio"><div class="option-radio-dot"></div></div>
+        <div class="option-icon">✨</div>
+        <div>
+          <div class="option-label">Aesthetic Treatment</div>
+          <div class="option-sub">Injectables, laser, peels, skin brightening, or anti-ageing</div>
+        </div>
+      </div>
+      <div class="option-card" onclick="selectOption(this,'checkup')">
+        <div class="option-radio"><div class="option-radio-dot"></div></div>
+        <div class="option-icon">🩺</div>
+        <div>
+          <div class="option-label">General Check-up</div>
+          <div class="option-sub">Routine skin health screening, cancer check, or new patient visit</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Name field (appears after selection) -->
+    <div id="nameStep" style="display:none;">
+      <input type="text" class="wa-input" id="patientName" placeholder="Your first name (optional — we love to personalise!)" />
+    </div>
+
+    <!-- WhatsApp button (appears after selection) -->
+    <button class="wa-btn" id="waBtn" onclick="openWhatsApp()">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L.057 23.5l5.817-1.528A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.507-5.17-1.394l-.37-.22-3.453.906.922-3.369-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Chat with Us on WhatsApp
+    </button>
+    <p class="wa-note" id="waNote" style="display:none;">⚡ We typically reply within minutes during clinic hours.</p>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <div>
+    <p class="sec-label reveal">FAQ</p>
+    <h2 class="sec-title reveal d1">Common <em><span class="grad">questions</span></em></h2>
+    <p class="about-body reveal d2" style="margin-top:1.5rem;">Transparency is central to our practice. If your question isn't here, WhatsApp us and we'll answer right away.</p>
+    <div style="margin-top:2rem;" class="reveal d3">
+      <a href="https://wa.me/971545928928" target="_blank" class="btn-grad btn-wa" style="font-size:0.78rem;display:inline-flex;">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L.057 23.5l5.817-1.528A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.507-5.17-1.394l-.37-.22-3.453.906.922-3.369-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+        WhatsApp Us
+      </a>
+    </div>
+  </div>
+  <div class="faq-list reveal d2">
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What should I expect at my first consultation? <span class="faq-icon">+</span></button><div class="faq-ans"><p class="faq-ans-inner">Your initial appointment is 60 minutes and includes a comprehensive skin analysis, detailed medical history review, and a personalised treatment discussion. We never rush — this time is entirely yours.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Are treatments suitable for all skin types and tones? <span class="faq-icon">+</span></button><div class="faq-ans"><p class="faq-ans-inner">Absolutely. We have particular expertise in treating darker Fitzpatrick skin types (IV–VI) — a population often underserved in aesthetic dermatology. Every protocol is individually tailored to your skin.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">How quickly can I book an appointment? <span class="faq-icon">+</span></button><div class="faq-ans"><p class="faq-ans-inner">Simply send us a WhatsApp message — we typically respond within minutes during clinic hours and can confirm your appointment the same day. New patients are always welcome.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">Is my personal information kept confidential? <span class="faq-icon">+</span></button><div class="faq-ans"><p class="faq-ans-inner">Absolutely. All patient information is handled in strict accordance with applicable health data protection regulations. Your privacy and dignity are paramount at every step of care.</p></div></div>
+    <div class="faq-item"><button class="faq-q" onclick="toggleFaq(this)">What is your approach to natural-looking results? <span class="faq-icon">+</span></button><div class="faq-ans"><p class="faq-ans-inner">Our aesthetic philosophy is "enhancement, not alteration." Using minimal effective dosing, anatomical precision, and deep understanding of facial harmony, the goal is always for you to look like the best, most refreshed version of yourself.</p></div></div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="f-brand">Alkubaisy Aesthetics Clinic <span class="grad">.</span></div>
+    <p class="f-tag">Advanced Dermatology & Medical Aesthetics<br/>Dubai</p>
+  </div>
+  <div>
+    <p class="f-head">Treatments</p>
+    <div class="f-links"><a href="#">Injectables</a><a href="#">Laser Treatments</a><a href="#">Chemical Peels</a><a href="#">Medical Dermatology</a><a href="#">Skin Screening</a></div>
+  </div>
+  <div>
+    <p class="f-head">Clinic</p>
+    <div class="f-links"><a href="#">About Us</a><a href="#">Our Philosophy</a><a href="#">Testimonials</a><a href="#">Blog</a></div>
+  </div>
+  <div>
+    <p class="f-head">Contact</p>
+    <div class="f-links"><a href="tel:971545928928">971545928928</a><a href="#">Dubai</a><a href="#">Sun–Thu: 9 AM–7 PM</a><a href="#">Instagram</a></div>
+  </div>
+</footer>
+<div class="f-bottom">
+  <span>© 2025 Alkubaisy Aesthetics Clinic . All rights reserved.</span>
+  <span><a href="#">Privacy Policy</a> · <a href="#">Terms</a></span>
+</div>
+
+<!-- Floating WhatsApp button -->
+<a class="float-wa" href="https://wa.me/971545928928" target="_blank" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.127.558 4.126 1.533 5.86L.057 23.5l5.817-1.528A11.95 11.95 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.885 0-3.65-.507-5.17-1.394l-.37-.22-3.453.906.922-3.369-.24-.386A9.944 9.944 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script>
+  // Map URL conversion — accepts any Google Maps URL and converts to embeddable src
+  (function(){
+    const RAW_URL = 'https://www.google.com/maps/search/?api=1&query=Alkubaisy%20Aesthetics%20Clinic%20-%20%D8%B9%D9%8A%D8%A7%D8%AF%D8%A9%20%D8%A7%D9%84%D9%83%D8%A8%D9%8A%D8%B3%D9%8A%20%D9%84%D9%84%D8%AA%D8%AC%D9%85%D9%8A%D9%84&query_place_id=ChIJIwbfDUppXz4RNzvHb2uTSkA';
+    const frame = document.getElementById('mapFrame');
+    const dirBtn = document.getElementById('mapDirectionsBtn');
+    if(!frame) return;
+
+    // Set "Get Directions" to open original URL
+    if(dirBtn) dirBtn.href = RAW_URL;
+
+    // Build an embed URL from the raw URL
+    let embedSrc = '';
+
+    // Already an embed URL?
+    if(RAW_URL.includes('/maps/embed')) {
+      embedSrc = RAW_URL;
+    }
+    // place_id present → use Place embed
+    else if(RAW_URL.includes('query_place_id=')) {
+      const placeMatch = RAW_URL.match(/query_place_id=([^&]+)/);
+      const queryMatch = RAW_URL.match(/query=([^&]+)/);
+      if(placeMatch) {
+        const placeId = placeMatch[1];
+        const q = queryMatch ? queryMatch[1] : '';
+        embedSrc = `https://www.google.com/maps/embed/v1/place?key=AIzaSyD-placeholder&q=${q}&place_id=${placeId}&zoom=15`;
+      }
+    }
+    // Fallback: use the search query in an embed search URL (no API key needed path)
+    // Best no-key option: convert to a search iframe using maps.google.com/maps?output=embed
+    if(!embedSrc) {
+      // Extract query param
+      const queryMatch = RAW_URL.match(/[?&]query=([^&]+)/);
+      const q = queryMatch ? queryMatch[1] : encodeURIComponent('Alkubaisy Aesthetics Clinic ');
+      embedSrc = `https://maps.google.com/maps?q=${q}&z=15&output=embed`;
+    } else {
+      // Re-build without placeholder API key using the no-key embed
+      const queryMatch = RAW_URL.match(/[?&]query=([^&]+)/);
+      const q = queryMatch ? queryMatch[1] : encodeURIComponent('Alkubaisy Aesthetics Clinic ');
+      embedSrc = `https://maps.google.com/maps?q=${q}&z=15&output=embed`;
+    }
+
+    frame.src = embedSrc;
+  })();
+  const nav = document.getElementById('mainNav');
+  window.addEventListener('scroll', () => nav.classList.toggle('solid', scrollY > 60));
+
+  // Scroll reveal
+  const revEls = document.querySelectorAll('.reveal');
+  const ro = new IntersectionObserver(entries => {
+    entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('up'); ro.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  revEls.forEach(el => ro.observe(el));
+  document.querySelectorAll('.hero .reveal').forEach((el,i) => setTimeout(() => el.classList.add('up'), 200+i*130));
+
+  // Count-up
+  function countUp(el, end, suffix) {
+    let v=0, step=end/60;
+    const t=setInterval(()=>{ v+=step; if(v>=end){el.textContent=end+suffix;clearInterval(t);return;} el.textContent=Math.floor(v)+suffix; },20);
+  }
+  const so = new IntersectionObserver(e => {
+    if(e[0].isIntersecting){
+      countUp(document.getElementById('s1'),12,'k+');
+      countUp(document.getElementById('s2'),98,'%');
+      countUp(document.getElementById('s3'),15,'+');
+      so.disconnect();
+    }
+  },{threshold:0.5});
+  const sb=document.querySelector('.hero-stats'); if(sb) so.observe(sb);
+
+  // Service filter
+  function filterSvc(type,btn){
+    document.querySelectorAll('.svc-tab').forEach(t=>t.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.svc-card').forEach(c=>{
+      const show=type==='all'||c.dataset.t===type;
+      c.style.opacity=show?'1':'0.2'; c.style.pointerEvents=show?'auto':'none';
+    });
+  }
+
+  // Process accordion
+  function activateProc(el){
+    document.querySelectorAll('.proc-step').forEach(s=>s.classList.remove('on'));
+    el.classList.add('on');
+  }
+
+  // FAQ
+  function toggleFaq(btn){
+    const item=btn.parentElement, wasOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i=>{i.classList.remove('open');i.querySelector('.faq-q').classList.remove('open');});
+    if(!wasOpen){item.classList.add('open');btn.classList.add('open');}
+  }
+
+  // WhatsApp booking flow
+  let selectedVal = null;
+  const optionLabels = {
+    skin_concern: 'Skin Concern or Condition (acne, pigmentation, rosacea, etc.)',
+    aesthetic: 'Aesthetic Treatment (injectables, laser, peels, etc.)',
+    checkup: 'General Skin Check-up / New Patient Consultation'
+  };
+
+  function selectOption(card, val){
+    document.querySelectorAll('.option-card').forEach(c=>c.classList.remove('selected'));
+    card.classList.add('selected');
+    selectedVal = val;
+
+    // Reveal name step
+    document.getElementById('nameStep').style.display = 'block';
+    // Reveal WA button
+    document.getElementById('waBtn').classList.add('show');
+    document.getElementById('waNote').style.display = 'block';
+
+    // Update pills
+    document.getElementById('pill1').classList.add('active');
+    document.getElementById('pill2').classList.add('active');
+    document.getElementById('pill3').classList.add('active');
+
+    // Smooth scroll to button
+    setTimeout(() => document.getElementById('waBtn').scrollIntoView({behavior:'smooth',block:'nearest'}), 100);
+  }
+
+  function openWhatsApp(){
+    const name = document.getElementById('patientName').value.trim();
+    const label = optionLabels[selectedVal] || 'General Enquiry';
+    const greeting = name ? `Hi! My name is ${name}.` : 'Hello!';
+    const msg = `${greeting} I'd like to book an appointment at Alkubaisy Aesthetics Clinic .\n\n*Reason for visit:* ${label}\n\nCould you please advise on the next available appointment? Thank you!`;
+    const phone = '971545928928'.replace(/[\s+\-().]/g,'');
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+  }
+</script>
+</body>
+</html>
